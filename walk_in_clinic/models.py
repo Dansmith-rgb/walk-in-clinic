@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -6,6 +7,7 @@ from django.core.exceptions import ValidationError
 
 class Appointment(models.Model):
     """A appointment the user creates"""
+    names = models.ForeignKey(User, on_delete=models.CASCADE)
     service = models.CharField(max_length=200)
     notes = models.CharField(max_length=200, default="No notes at this time")
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE, blank=True)
@@ -42,7 +44,7 @@ class Clinic(models.Model):
     """A clinic can be set up by Doctor"""
     clinic_name = models.CharField(max_length=50, default=" ")
     location = models.CharField(max_length=50, default="39 York Road, London, SW81 4AQ, England")
-    dr_email = models.EmailField(max_length=50, default="Dan")
+    dr_email = models.EmailField(max_length=50, default="Dan@gmail.com")
     dr_phonenumber = models.IntegerField(default=5263648574)
     payment_methods = [
         ('pp', 'PayPal'),

@@ -1,0 +1,15 @@
+{% extends "walk_in_clinic/base.html" %}
+
+{% block content %}
+
+  <p>Appointments</p>
+
+  <ul>
+    {% for appointment in appointments %}
+      <li>{{ appointment }}</li>
+    {% empty %}
+      <li>No appointments have been added yet.</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

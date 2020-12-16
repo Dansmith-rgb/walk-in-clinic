@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
+import datetime
+from django.utils import timezone, dateformat
 
 
 
@@ -11,8 +13,8 @@ class Appointment(models.Model):
     service = models.CharField(max_length=200)
     notes = models.CharField(max_length=200, default="No notes at this time")
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE, blank=True)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.DateTimeField(default=dateformat.format(timezone.now(), 'Y-m-d H:i:s'))
+    end_time = models.DateTimeField(default=dateformat.format(timezone.now(), 'Y-m-d H:i:s'))
 
     def check_overlap(self, fixed_start, fixed_end, new_start, new_end):
         overlap = False

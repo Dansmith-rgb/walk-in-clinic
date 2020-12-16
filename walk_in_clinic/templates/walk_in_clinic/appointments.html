@@ -6,10 +6,14 @@
 
   <ul>
     {% for appointment in appointments %}
-      <li>{{ appointment }}</li>
+      <li>
+        <a href={% url 'walk_in_clinic:appointment' appointment.id %}>{{ appointment }}</a>
+      </li>
     {% empty %}
       <li>No appointments have been added yet.</li>
     {% endfor %}
   </ul>
+
+  <a href="{% url 'walk_in_clinic:new_appointment' %}">Add a new appointment</a>
 
 {% endblock content %}

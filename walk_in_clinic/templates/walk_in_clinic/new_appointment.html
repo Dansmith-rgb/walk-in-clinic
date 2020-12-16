@@ -1,0 +1,12 @@
+{% extends "walk_in_clinic/base.html" %}
+
+{% block content %}
+  <p>Add a new appointment:</p>
+
+  <form action="{% url 'walk_in_clinic:new_appointment' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name-"submit">Add appointment</button>
+  </form>
+
+{% endblock content %}

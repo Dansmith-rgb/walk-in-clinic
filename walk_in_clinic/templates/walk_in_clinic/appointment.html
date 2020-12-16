@@ -1,0 +1,17 @@
+{% extends 'walk_in_clinic/base.html' %}
+
+{% block content %}
+
+  <p>Appointment: {{ appointment }}</p>
+
+  <p>Name: {{ appointment.names }}</p>
+
+  <p>Clinic: {{ appointment.clinic }}</p>
+
+  <p>start time: {{ appointment.start_time }}</p>
+
+  <p>end time: {{ appointment.end_time }}</p>
+
+  <p>Notes: {{ appointment.notes }}</p>
+
+{% endblock content %}

@@ -14,4 +14,6 @@ urlpatterns = [
     path('appointments/<int:appointment_id>/', views.appointment, name='appointment'),
     # Page for adding new appointment
     path('new_appointment/', views.new_appointment, name='new_appointment'),
+    # Page for editing appointments
+    path('edit_appointment/<int:appointment_id>/', views.edit_appointment, name="edit_appointment"),
 ]

@@ -30,3 +30,17 @@ def new_appointment(request):
 
     context = {'form': form}
     return render(request, 'walk_in_clinic/new_appointment.html', context)
+
+def edit_appointment(request, appointment_id):
+    """edit a appointment."""
+    appointment = Appointment.objects.get(id=appointment_id)
+    if request.method != 'POST':
+        form = AppointmentForm(instance=appointment)
+    else:
+        form = AppointmentForm(instance=appointment, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('walk_in_clinic:appointment', appointment_id=appointment.id)
+
+    context = {'appointment': appointment, 'form': form}
+    return render(request, 'walk_in_clinic/edit_appointment.html', context)

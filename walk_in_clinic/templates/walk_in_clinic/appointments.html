@@ -8,6 +8,9 @@
     {% for appointment in appointments %}
       <li>
         <a href={% url 'walk_in_clinic:appointment' appointment.id %}>{{ appointment }}</a>
+        <p>
+          <a href="{% url 'walk_in_clinic:edit_appointment' appointment.id %}">Edit appointment</a>
+        </p>
       </li>
     {% empty %}
       <li>No appointments have been added yet.</li>

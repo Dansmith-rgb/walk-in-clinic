@@ -26,4 +26,6 @@ urlpatterns = [
     path('clinics/<int:clinic_id>/', views.clinic, name='clinic'),
     # Page for dr to make a clinic
     path('new_clinic/', views.new_clinic, name='new_clinic'),
+    # Page for dr to edit clinic
+    path('edit_clinic/<int:clinic_id>/', views.edit_clinic, name='edit_clinic')
 ]

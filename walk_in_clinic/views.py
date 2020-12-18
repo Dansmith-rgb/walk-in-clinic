@@ -81,6 +81,7 @@ def edit_appointment(request, appointment_id):
     context = {'appointment': appointment, 'form': form}
     return render(request, 'walk_in_clinic/edit_appointment.html', context)
 
+
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='Doctors').exists())
 def new_clinic(request):
@@ -98,6 +99,7 @@ def new_clinic(request):
     context = {'form': form}
     return render(request, 'walk_in_clinic/new_clinic.html', context)
 
+
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='Patients').exists())
 def clinics(request):
@@ -106,9 +108,27 @@ def clinics(request):
     context = {'clinics': clinics}
     return render(request, 'walk_in_clinic/clinics.html', context)
 
+
 @login_required
 def clinic(request, clinic_id):
     """Show a individual clinic."""
     clinic = Clinic.objects.get(id=clinic_id)
     context = {'clinic': clinic}
     return render(request, 'walk_in_clinic/clinic.html', context)
+
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='Doctors').exists())
+def edit_clinic(request, clinic_id):
+    """edit a clinic."""
+    clinic = Clinic.objects.get(id=clinic_id)
+    if request.method != 'POST':
+        form = ClinicForm(instance=clinic)
+    else:
+        form = ClinicForm(instance=clinic, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('walk_in_clinic:clinic', clinic_id=clinic.id)
+
+    context = {'clinic': clinic, 'form': form}
+    return render(request, 'walk_in_clinic/edit_clinic.html', context)

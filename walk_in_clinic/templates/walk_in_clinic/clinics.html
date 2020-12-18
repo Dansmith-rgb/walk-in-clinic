@@ -10,6 +10,8 @@
         <li>
           <a href={% url 'walk_in_clinic:clinic' clinic.id %}>{{ clinic }}</a>
         </li>
+        <p>
+          <a href="{% url 'walk_in_clinic:edit_clinic' clinic.id %}">Edit clinic</a>
       {% empty %}
         <li>No clinics have been added yet.</li>
       {% endfor %}

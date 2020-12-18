@@ -1,13 +1,30 @@
-<p>
-  <a href="{% url 'walk_in_clinic:index' %}">Walk In Clinic</a> -
-  <a href="{% url 'walk_in_clinic:appointments' %}">Appointments</a> -
-  {% if user.is_authenticated %}
-    Hello, {{ user.username }}.
-    <a href="{% url 'users:logout' %}">Log out</a>
-  {% else %}
-    <a href="{% url 'users:register' %}">Register</a> -
-    <a href="{% url 'users:login' %}">Log in</a>
-  {% endif %}
-</p>
+
+{% if user.groups.all.0.name == "Patients" %}
+  <p>
+    <a href="{% url 'walk_in_clinic:index' %}">Walk In Clinic</a> -
+    <a href="{% url 'walk_in_clinic:appointments' %}">Appointments</a> -
+    <a href="{% url 'walk_in_clinic:clinics' %}">Clinics</a> -
+    {% if user.is_authenticated %}
+      Hello, {{ user.username }}.
+      <a href="{% url 'users:logout' %}">Log out</a>
+    {% else %}
+      <a href="{% url 'users:register' %}">Register</a> -
+      <a href="{% url 'users:login' %}">Log in</a>
+    {% endif %}
+  </p>
+{% else %}
+  <p>
+    <a href="{% url 'walk_in_clinic:index' %}">Walk In Clinic</a> -
+    <a href="{% url 'walk_in_clinic:appointments_dr'  %}">Appointments</a> -
+    <a href="{% url 'walk_in_clinic:clinics' %}">Clinics</a> -
+    {% if user.is_authenticated %}
+      Hello, {{ user.username }}.
+      <a href="{% url 'users:logout' %}">Log out</a>
+    {% else %}
+      <a href="{% url 'users:register' %}">Register</a> -
+      <a href="{% url 'users:login' %}">Log in</a>
+    {% endif %}
+  </p>
+{% endif %}
 
 {% block content %}{% endblock content %}

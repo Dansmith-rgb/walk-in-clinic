@@ -1,0 +1,33 @@
+{% extends "walk_in_clinic/base.html" %}
+
+{% block content %}
+
+  {% if user.groups.all.0.name == "Doctors" %}
+    <p>Clinics</p>
+
+    <ul>
+      {% for clinic in clinics %}
+        <li>
+          <a href={% url 'walk_in_clinic:clinic' clinic.id %}>{{ clinic }}</a>
+        </li>
+      {% empty %}
+        <li>No clinics have been added yet.</li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'walk_in_clinic:new_clinic' %}">Add a new clinc</a>
+  {% else %}
+    <p>Clinics</p>
+
+    <ul>
+      {% for clinic in clinics %}
+        <li>
+          <a href={% url 'walk_in_clinic:clinic' clinic.id %}>{{ clinic }}</a>
+        </li>
+      {% empty %}
+        <li>No clinics have been added yet.</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+{% endblock content %}

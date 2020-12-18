@@ -46,6 +46,7 @@ class Clinic(models.Model):
     """A clinic can be set up by Doctor"""
     clinic_name = models.CharField(max_length=50, default=" ")
     location = models.CharField(max_length=50, default="39 York Road, London, SW81 4AQ, England")
+    dr_name = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     dr_email = models.EmailField(max_length=50, default="Dan@gmail.com")
     dr_phonenumber = models.IntegerField(default=5263648574)
     payment_methods = [

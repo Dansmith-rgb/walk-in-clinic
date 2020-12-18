@@ -4,19 +4,37 @@
 
   <p>Appointments</p>
 
-  <ul>
-    {% for appointment in appointments %}
-      <li>
-        <a href={% url 'walk_in_clinic:appointment' appointment.id %}>{{ appointment }}</a>
-        <p>
-          <a href="{% url 'walk_in_clinic:edit_appointment' appointment.id %}">Edit appointment</a>
-        </p>
-      </li>
-    {% empty %}
-      <li>No appointments have been added yet.</li>
-    {% endfor %}
-  </ul>
+  {% if user.groups.all.0.name == "Patients" %}
+    <ul>
+      {% for appointment in appointments %}
+        <li>
+          <a href={% url 'walk_in_clinic:appointment' appointment.id %}>{{ appointment }}</a>
+          <p>
+            <a href="{% url 'walk_in_clinic:edit_appointment' appointment.id %}">Edit appointment</a>
+          </p>
+        </li>
+      {% empty %}
+        <li>No appointments have been added yet.</li>
+      {% endfor %}
+    </ul>
 
-  <a href="{% url 'walk_in_clinic:new_appointment' %}">Add a new appointment</a>
+    <a href="{% url 'walk_in_clinic:new_appointment' %}">Add a new appointment</a>
+  {% else %}
+    <ul>
+      {% for appointment in appointments %}
+        <li>
+          <a href={% url 'walk_in_clinic:appointment_dr' appointment.id %}>{{ appointment }}</a>
+          <p>
+            <a href="{% url 'walk_in_clinic:edit_appointment' appointment.id %}">Edit appointment</a>
+          </p>
+        </li>
+      {% empty %}
+        <li>No appointments have been added yet.</li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'walk_in_clinic:new_appointment' %}">Add a new appointment</a>
+
+  {% endif %}
 
 {% endblock content %}

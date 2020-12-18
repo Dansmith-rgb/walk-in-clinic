@@ -1,0 +1,21 @@
+{% extends "walk_in_clinic/base.html" %}
+
+{% block content %}
+
+  <p>Clinic: {{ clinic }}</p>
+
+  <p>Doctor's Name: {{ clinic.dr_name }}</p>
+
+  <p>Location: {{ clinic.location }}</p>
+
+  <p>Payment method: {% if clinic.payment_method_available == "pp" %} Paypal
+                     {% elif clinic.payment_method_available == "cc" %} Credit Card
+                     {% elif clinic.payment_method_available == "dc" %} Debit Card  
+                     {% elif clinic.payment_method_available == "ca" %} Cash
+                     {% endif %}</p>
+
+  <p>Doctor's email: {{ clinic.dr_email }}</p>
+
+  <p>Doctor's phone-number: {{ clinic.dr_phonenumber }}</p>
+
+{% endblock content %}

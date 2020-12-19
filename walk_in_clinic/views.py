@@ -110,6 +110,14 @@ def clinics(request):
 
 
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='Doctors').exists())
+def clinics_dr(request):
+    clinics = Clinic.objects.filter(dr_name=request.user).order_by('clinic_name')
+    context = {'clinics': clinics}
+    return render(request, 'walk_in_clinic/clinics.html', context)
+
+
+@login_required
 def clinic(request, clinic_id):
     """Show a individual clinic."""
     clinic = Clinic.objects.get(id=clinic_id)

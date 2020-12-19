@@ -16,7 +16,7 @@
   <p>
     <a href="{% url 'walk_in_clinic:index' %}">Walk In Clinic</a> -
     <a href="{% url 'walk_in_clinic:appointments_dr'  %}">Appointments</a> -
-    <a href="{% url 'walk_in_clinic:clinics' %}">Clinics</a> -
+    <a href="{% url 'walk_in_clinic:clinics_dr' %}">Clinics</a> -
     {% if user.is_authenticated %}
       Hello, {{ user.username }}.
       <a href="{% url 'users:logout' %}">Log out</a>

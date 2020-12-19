@@ -22,6 +22,8 @@ urlpatterns = [
     path('edit_appointment/<int:appointment_id>/', views.edit_appointment, name="edit_appointment"),
     # Page for seeing all clinics
     path('clinics/', views.clinics, name='clinics'),
+    # Page for dr to see all of their clinics
+    path('clinics_dr/', views.clinics_dr, name='clinics_dr'),
     # Page for seeing a single clinic
     path('clinics/<int:clinic_id>/', views.clinic, name='clinic'),
     # Page for dr to make a clinic

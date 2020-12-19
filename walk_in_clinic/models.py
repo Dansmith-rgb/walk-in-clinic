@@ -34,10 +34,11 @@ class Appointment(models.Model):
         appointments = Appointment.objects.filter(start_time=self.start_time)
         if appointments.exists():
             for appointment in appointments:
-                if self.check_overlap(appointment.start_time, appointment.end_time, self.start_time, self.end_time):
-                    raise ValidationError(
-                        'There is an overlap with another appointment: ' + str(
-                            appointment.start_time) + ' ' + str(appointment.end_time))
+                if appointment.clinic == self.clinic:
+                    if self.check_overlap(appointment.start_time, appointment.end_time, self.start_time, self.end_time):
+                        raise ValidationError(
+                            'There is an overlap with another appointment: ' + str(
+                                appointment.start_time) + ' ' + str(appointment.end_time))
 
     def __str__(self):
         return self.service
